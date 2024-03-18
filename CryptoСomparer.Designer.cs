@@ -45,6 +45,11 @@ namespace TestCryptoСomparer
             label3 = new Label();
             label4 = new Label();
             button2 = new Button();
+            button3 = new Button();
+            comboBox1 = new ComboBox();
+            label5 = new Label();
+            label6 = new Label();
+            label7 = new Label();
             SuspendLayout();
             // 
             // textBox1
@@ -83,11 +88,11 @@ namespace TestCryptoСomparer
             // 
             // button1
             // 
-            button1.Location = new Point(192, 288);
+            button1.Location = new Point(54, 288);
             button1.Name = "button1";
             button1.Size = new Size(171, 50);
             button1.TabIndex = 4;
-            button1.Text = "Start";
+            button1.Text = "StartRest";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
@@ -133,19 +138,74 @@ namespace TestCryptoСomparer
             // 
             // button2
             // 
-            button2.Location = new Point(458, 288);
+            button2.Location = new Point(424, 288);
             button2.Name = "button2";
-            button2.Size = new Size(118, 50);
+            button2.Size = new Size(148, 50);
             button2.TabIndex = 9;
-            button2.Text = "button2";
+            button2.Text = "Stop";
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
+            // 
+            // button3
+            // 
+            button3.Location = new Point(240, 288);
+            button3.Name = "button3";
+            button3.Size = new Size(160, 50);
+            button3.TabIndex = 10;
+            button3.Text = "StartSocket";
+            button3.UseVisualStyleBackColor = true;
+            // 
+            // comboBox1
+            // 
+            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox1.FlatStyle = FlatStyle.System;
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Items.AddRange(new object[] { "BTC", "ETH" });
+            comboBox1.Location = new Point(487, 68);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(118, 23);
+            comboBox1.TabIndex = 11;
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(487, 50);
+            label5.Name = "label5";
+            label5.Size = new Size(74, 15);
+            label5.TabIndex = 12;
+            label5.Text = "SelectCrypto";
+            label5.Click += label5_Click;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(487, 111);
+            label6.Name = "label6";
+            label6.Size = new Size(51, 15);
+            label6.TabIndex = 13;
+            label6.Text = "Selected";
+            label6.Click += label6_Click;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(553, 111);
+            label7.Name = "label7";
+            label7.Size = new Size(12, 15);
+            label7.TabIndex = 14;
+            label7.Text = "?";
             // 
             // CryptoСomparer
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(634, 411);
+            Controls.Add(label7);
+            Controls.Add(label6);
+            Controls.Add(label5);
+            Controls.Add(comboBox1);
+            Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(label4);
             Controls.Add(label3);
@@ -214,12 +274,17 @@ namespace TestCryptoСomparer
         private async void button2_Click(object sender, EventArgs e)
         {
             ts.Cancel();
-            Thread.Sleep(3000);
             textBox1.Text = string.Empty;
             textBox2.Text = string.Empty;
             textBox3.Text = string.Empty;
             textBox4.Text = string.Empty;
             ts = new CancellationTokenSource();
         }
+
+        private Button button3;
+        private ComboBox comboBox1;
+        private Label label5;
+        private Label label6;
+        private Label label7;
     }
 }
