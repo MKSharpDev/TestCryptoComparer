@@ -182,7 +182,7 @@ namespace TestCryptoСomparer
 
 
         //создаем лист клиентов для использования в разных кнопках
-        private List<IGetTickerByRest> GetList()
+        private List<IGetTickerByRest> GetClientsList()
         {
             List<IGetTickerByRest> clientsList = new List<IGetTickerByRest>();
             clientsList.Add(new BinanceClient(textBox1));
@@ -193,22 +193,33 @@ namespace TestCryptoСomparer
             return clientsList;
         }
 
+        private CancellationTokenSource ts = new CancellationTokenSource();
+
 
         private async void button1_Click(object sender, EventArgs e)
         {
 
-            List<IGetTickerByRest> clientsList = GetList();
+            CancellationToken token = ts.Token;
+
+            List<IGetTickerByRest> clientsList = GetClientsList();
 
             List<Task> tasks = new List<Task>();
             foreach (var client in clientsList)
             {
-                tasks.Add(Task.Factory.StartNew(() => client.GetBTCByRestAsync()));
-            }        
+                tasks.Add(Task.Factory.StartNew(() => client.GetBTCByRestAsync(token) ));
+            }
+
         }
 
         private async void button2_Click(object sender, EventArgs e)
         {
-
+            ts.Cancel();
+            Thread.Sleep(3000);
+            textBox1.Text = string.Empty;
+            textBox2.Text = string.Empty;
+            textBox3.Text = string.Empty;
+            textBox4.Text = string.Empty;
+            ts = new CancellationTokenSource();
         }
     }
 }

@@ -2,6 +2,7 @@
 using Bitget.Net.Clients;
 using Kucoin.Net.Clients;
 using Microsoft.VisualBasic;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,10 +21,10 @@ namespace TestCryptoСomparer.Implementation
             this.textBox = textBox;
         }
 
-        public async Task GetBTCByRestAsync()
+        public async Task GetBTCByRestAsync(CancellationToken token)
         {
             var restClient = new BitgetRestClient();
-            while (true)
+            while (!token.IsCancellationRequested)
             {
                 var tickerResult = await restClient.SpotApi.ExchangeData.GetTickerAsync("BTCUSDT_SPBL");
                 var lastPrice = tickerResult.Data.ClosePrice;

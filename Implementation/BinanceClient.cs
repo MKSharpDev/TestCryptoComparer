@@ -18,10 +18,10 @@ namespace TestCryptoСomparer.Implementation
             this.textBox = textBox;
         }
 
-        public async Task GetBTCByRestAsync()
+        public async Task GetBTCByRestAsync(CancellationToken token)
         {
             var restClient = new BinanceRestClient();
-            while (true)
+            while (!token.IsCancellationRequested)
             {
                 var tickerResult = await restClient.SpotApi.ExchangeData.GetTickerAsync("BTCUSDT");
                 var lastPrice = tickerResult.Data.LastPrice;

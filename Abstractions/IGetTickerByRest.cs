@@ -8,6 +8,6 @@ namespace TestCryptoСomparer.Abstractions
 {
     internal interface IGetTickerByRest
     {
-        public  Task GetBTCByRestAsync();
+        public  Task GetBTCByRestAsync(CancellationToken token);
     }
 }
