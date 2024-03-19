@@ -1,5 +1,6 @@
 ﻿using Binance.Net.Clients;
 using Microsoft.VisualBasic;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,27 +13,19 @@ namespace TestCryptoСomparer.Implementation
 {
     public class BinanceClient: IGetTickerByRest
     {
-        private TextBox textBox;
-        public BinanceClient(TextBox textBox) 
-        { 
-            this.textBox = textBox;
-        }
-
-        public async Task GetBTCByRestAsync(CancellationToken token)
+        public async Task<string> GetBTCByRestAsync( )
         {
             var restClient = new BinanceRestClient();
-            while (!token.IsCancellationRequested)
+            try
             {
                 var tickerResult = await restClient.SpotApi.ExchangeData.GetTickerAsync("BTCUSDT");
                 var lastPrice = tickerResult.Data.LastPrice;
-
-                textBox.Invoke(() => {
-                    textBox.Clear();
-                    textBox.AppendText(lastPrice.ToString());
-                });
-
-                Thread.Sleep(5000);
+                return lastPrice.ToString();
             }
+            catch (Exception)
+            {
+                return "Ошибка получения данных";
+            }   
         }
     }
 }

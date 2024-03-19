@@ -1,4 +1,5 @@
 ﻿using Binance.Net.Clients;
+using Bybit.Net.Clients;
 using Kucoin.Net.Clients;
 using Microsoft.VisualBasic;
 using System;
@@ -13,26 +14,19 @@ namespace TestCryptoСomparer.Implementation
 {
     public class KucoinClient : IGetTickerByRest
     {
-        private TextBox textBox;
-        public KucoinClient(TextBox textBox) 
-        { 
-            this.textBox = textBox;
-        }
-
-        public async Task GetBTCByRestAsync(CancellationToken token)
+        public async Task<string> GetBTCByRestAsync()
         {
             var restClient = new KucoinRestClient();
-            while (!token.IsCancellationRequested)
+            try
             {
                 var tickerResult = await restClient.SpotApi.ExchangeData.GetTickerAsync("BTC-USDT");
+
                 var lastPrice = tickerResult.Data.LastPrice;
-
-                textBox.Invoke(() => {
-                    textBox.Clear();
-                    textBox.AppendText(lastPrice.ToString());
-                });
-
-                Thread.Sleep(5000);
+                return lastPrice.ToString();
+            }
+            catch (Exception)
+            {
+                return "Ошибка получения данных";
             }
         }
     }

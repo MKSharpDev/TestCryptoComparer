@@ -2,8 +2,10 @@
 using Bitget.Net.Clients;
 using Bybit.Net.Clients;
 using Kucoin.Net.Clients;
+using System.Diagnostics;
 using TestCryptoСomparer.Abstractions;
 using TestCryptoСomparer.Implementation;
+using TestCryptoСomparer.Implementation.Messendger;
 
 namespace TestCryptoСomparer
 {
@@ -35,16 +37,16 @@ namespace TestCryptoСomparer
         /// </summary>
         private void InitializeComponent()
         {
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            textBox3 = new TextBox();
-            textBox4 = new TextBox();
-            button1 = new Button();
+            binanceTextBox = new TextBox();
+            kucoinTextBox = new TextBox();
+            bitgetTextBox = new TextBox();
+            bybitTextBox = new TextBox();
+            GetByRestButton = new Button();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
             label4 = new Label();
-            button2 = new Button();
+            StopBotton = new Button();
             button3 = new Button();
             comboBox1 = new ComboBox();
             label5 = new Label();
@@ -54,47 +56,47 @@ namespace TestCryptoСomparer
             // 
             // textBox1
             // 
-            textBox1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox1.Location = new Point(271, 62);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(171, 29);
-            textBox1.TabIndex = 0;
-            textBox1.TextChanged += textBox1_TextChanged;
+            binanceTextBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            binanceTextBox.Location = new Point(271, 62);
+            binanceTextBox.Name = "textBox1";
+            binanceTextBox.Size = new Size(171, 29);
+            binanceTextBox.TabIndex = 0;
+            binanceTextBox.TextChanged += textBox1_TextChanged;
             // 
             // textBox2
             // 
-            textBox2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox2.Location = new Point(271, 97);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(171, 29);
-            textBox2.TabIndex = 1;
+            kucoinTextBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            kucoinTextBox.Location = new Point(271, 97);
+            kucoinTextBox.Name = "textBox2";
+            kucoinTextBox.Size = new Size(171, 29);
+            kucoinTextBox.TabIndex = 1;
             // 
             // textBox3
             // 
-            textBox3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox3.Location = new Point(271, 131);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(171, 29);
-            textBox3.TabIndex = 2;
+            bitgetTextBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            bitgetTextBox.Location = new Point(271, 131);
+            bitgetTextBox.Name = "textBox3";
+            bitgetTextBox.Size = new Size(171, 29);
+            bitgetTextBox.TabIndex = 2;
             // 
             // textBox4
             // 
-            textBox4.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox4.Location = new Point(271, 169);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(171, 29);
-            textBox4.TabIndex = 3;
-            textBox4.TextChanged += textBox4_TextChanged;
+            bybitTextBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            bybitTextBox.Location = new Point(271, 169);
+            bybitTextBox.Name = "textBox4";
+            bybitTextBox.Size = new Size(171, 29);
+            bybitTextBox.TabIndex = 3;
+            bybitTextBox.TextChanged += textBox4_TextChanged;
             // 
             // button1
             // 
-            button1.Location = new Point(54, 288);
-            button1.Name = "button1";
-            button1.Size = new Size(171, 50);
-            button1.TabIndex = 4;
-            button1.Text = "StartRest";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            GetByRestButton.Location = new Point(54, 288);
+            GetByRestButton.Name = "button1";
+            GetByRestButton.Size = new Size(171, 50);
+            GetByRestButton.TabIndex = 4;
+            GetByRestButton.Text = "StartRest";
+            GetByRestButton.UseVisualStyleBackColor = true;
+            GetByRestButton.Click += GetByRestButtonClick;
             // 
             // label1
             // 
@@ -138,13 +140,13 @@ namespace TestCryptoСomparer
             // 
             // button2
             // 
-            button2.Location = new Point(424, 288);
-            button2.Name = "button2";
-            button2.Size = new Size(148, 50);
-            button2.TabIndex = 9;
-            button2.Text = "Stop";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
+            StopBotton.Location = new Point(424, 288);
+            StopBotton.Name = "button2";
+            StopBotton.Size = new Size(148, 50);
+            StopBotton.TabIndex = 9;
+            StopBotton.Text = "Stop";
+            StopBotton.UseVisualStyleBackColor = true;
+            StopBotton.Click += StopBottonClick;
             // 
             // button3
             // 
@@ -206,16 +208,16 @@ namespace TestCryptoСomparer
             Controls.Add(label5);
             Controls.Add(comboBox1);
             Controls.Add(button3);
-            Controls.Add(button2);
+            Controls.Add(StopBotton);
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(button1);
-            Controls.Add(textBox4);
-            Controls.Add(textBox3);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
+            Controls.Add(GetByRestButton);
+            Controls.Add(bybitTextBox);
+            Controls.Add(bitgetTextBox);
+            Controls.Add(kucoinTextBox);
+            Controls.Add(binanceTextBox);
             Name = "CryptoСomparer";
             Text = "TestCryptoСomparer";
             Load += CryptoСomparer_Load;
@@ -226,14 +228,14 @@ namespace TestCryptoСomparer
 
         #endregion
 
-        private TextBox textBox1;
-        private TextBox textBox2;
-        private TextBox textBox3;
-        private TextBox textBox4;
+        private TextBox binanceTextBox;
+        private TextBox kucoinTextBox;
+        private TextBox bitgetTextBox;
+        private TextBox bybitTextBox;
 
 
-        private Button button1;
-        private Button button2;
+        private Button GetByRestButton;
+        private Button StopBotton;
 
         private Label label1;
         private Label label2;
@@ -245,39 +247,66 @@ namespace TestCryptoСomparer
         private List<IGetTickerByRest> GetClientsList()
         {
             List<IGetTickerByRest> clientsList = new List<IGetTickerByRest>();
-            clientsList.Add(new BinanceClient(textBox1));
-            clientsList.Add(new KucoinClient(textBox2));
-            clientsList.Add(new BitgetClient(textBox3));
-            clientsList.Add(new BybitClient(textBox4));
+            clientsList.Add(new BinanceClient());
+            clientsList.Add(new KucoinClient());
+            clientsList.Add(new BitgetClient());
+            clientsList.Add(new BybitClient());
 
             return clientsList;
+        }
+
+        private List<TextBoxMessendger> GetTextBoxMessendgerList()
+        {
+            List<TextBoxMessendger> messengerList = new List<TextBoxMessendger>();
+            messengerList.Add(new TextBoxMessendger(binanceTextBox));
+            messengerList.Add(new TextBoxMessendger(kucoinTextBox));
+            messengerList.Add(new TextBoxMessendger(bitgetTextBox));
+            messengerList.Add(new TextBoxMessendger(bybitTextBox));
+
+            return messengerList;
         }
 
         private CancellationTokenSource ts = new CancellationTokenSource();
 
 
-        private async void button1_Click(object sender, EventArgs e)
+        private async void GetByRestButtonClick(object sender, EventArgs e)
         {
 
             CancellationToken token = ts.Token;
 
             List<IGetTickerByRest> clientsList = GetClientsList();
+            List<TextBoxMessendger> messengerList = GetTextBoxMessendgerList();
+
 
             List<Task> tasks = new List<Task>();
-            foreach (var client in clientsList)
-            {
-                tasks.Add(Task.Factory.StartNew(() => client.GetBTCByRestAsync(token) ));
-            }
+ 
+
+            Parallel.For(0, clientsList.Count,
+             index => {
+                 Task.Factory.StartNew(async () =>
+                 {
+                     while (!token.IsCancellationRequested)
+                     {
+                         var result = await clientsList[index].GetBTCByRestAsync();
+                         if (!token.IsCancellationRequested)
+                         {
+                             messengerList[index].SendMessege(result);
+                         }                       
+                         Thread.Sleep(5000);
+                     }
+                 });
+             });
+
 
         }
 
-        private async void button2_Click(object sender, EventArgs e)
+        private async void StopBottonClick(object sender, EventArgs e)
         {
             ts.Cancel();
-            textBox1.Text = string.Empty;
-            textBox2.Text = string.Empty;
-            textBox3.Text = string.Empty;
-            textBox4.Text = string.Empty;
+            binanceTextBox.Text = string.Empty;
+            kucoinTextBox.Text = string.Empty;
+            bitgetTextBox.Text = string.Empty;
+            bybitTextBox.Text = string.Empty;
             ts = new CancellationTokenSource();
         }
 

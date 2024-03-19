@@ -15,26 +15,27 @@ namespace TestCryptoСomparer.Implementation
 {
     public class BitgetClient : IGetTickerByRest
     {
-        private TextBox textBox;
-        public BitgetClient(TextBox textBox) 
-        { 
-            this.textBox = textBox;
-        }
-
-        public async Task GetBTCByRestAsync(CancellationToken token)
+        public async Task<string> GetBTCByRestAsync()
         {
             var restClient = new BitgetRestClient();
-            while (!token.IsCancellationRequested)
+            try
             {
                 var tickerResult = await restClient.SpotApi.ExchangeData.GetTickerAsync("BTCUSDT_SPBL");
+                if (tickerResult.Data == null)
+                {
+                    throw new Exception();
+                }
                 var lastPrice = tickerResult.Data.ClosePrice;
-
-                textBox.Invoke(() => {
-                    textBox.Clear();
-                    textBox.AppendText(lastPrice.ToString());
-                });
-                Thread.Sleep(5000);
+                return lastPrice.ToString();
             }
-        }
+            catch (NullReferenceException)
+            {
+                return "Ошибка";
+            }
+            catch (Exception)
+            {
+                return "Ошибка получения данных";
+            }
+        }     
     }
 }
