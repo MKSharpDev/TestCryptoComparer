@@ -11,7 +11,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace TestCryptoСomparer.Implementation
 {
-    public class BinanceClient : CryptoExchClient, IGetTicker
+    public class BinanceClient :  IGetTicker
     {
         public async Task<string> GetBTCByRestAsync()
         {
@@ -24,6 +24,19 @@ namespace TestCryptoСomparer.Implementation
         }
 
 
-
+        async Task<string> GetTicketByRestAsync(string ticket)
+        {
+            var restClient = new BinanceRestClient();
+            try
+            {
+                var tickerResult = await restClient.SpotApi.ExchangeData.GetTickerAsync(ticket);
+                var lastPrice = tickerResult.Data.LastPrice;
+                return lastPrice.ToString();
+            }
+            catch (Exception)
+            {
+                return "Ошибка получения данных";
+            }
+        }
     }
 }
