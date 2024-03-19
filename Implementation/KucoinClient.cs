@@ -12,22 +12,16 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace TestCryptoСomparer.Implementation
 {
-    public class KucoinClient : IGetTicker
+    public class KucoinClient : CryptoExchClient, IGetTicker
     {
-        public async Task<string> GetBTCByRestAsync()
-        {
-            var restClient = new KucoinRestClient();
-            try
+            public async Task<string> GetBTCByRestAsync()
             {
-                var tickerResult = await restClient.SpotApi.ExchangeData.GetTickerAsync("BTC-USDT");
+                return await GetTicketByRestAsync("BTC-USDT");
+            }
 
-                var lastPrice = tickerResult.Data.LastPrice;
-                return lastPrice.ToString();
-            }
-            catch (Exception)
+            public async Task<string> GetETHByRestAsync()
             {
-                return "Ошибка получения данных";
+                return await GetTicketByRestAsync("ETH-USDT");
             }
-        }
     }
 }
