@@ -13,7 +13,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace TestCryptoСomparer.Implementation
 {
-    public class BitgetClient : IGetTickerByRest
+    public class BitgetClient : IGetTicker
     {
         public async Task<string> GetBTCByRestAsync()
         {
@@ -27,10 +27,6 @@ namespace TestCryptoСomparer.Implementation
                 }
                 var lastPrice = tickerResult.Data.ClosePrice;
                 return lastPrice.ToString();
-            }
-            catch (NullReferenceException)
-            {
-                return "Ошибка";
             }
             catch (Exception)
             {

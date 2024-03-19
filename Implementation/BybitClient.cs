@@ -13,7 +13,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace TestCryptoСomparer.Implementation
 {
-    public class BybitClient : IGetTickerByRest
+    public class BybitClient : IGetTicker
     {
         public async Task<string> GetBTCByRestAsync()
         {

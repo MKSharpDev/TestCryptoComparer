@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace TestCryptoСomparer.Abstractions
 {
-    internal interface IGetTickerByRest
+    internal interface IGetTicker
     {
         public Task<string> GetBTCByRestAsync();
+        public Task<string> GetETHByRestAsync();
+
     }
 }

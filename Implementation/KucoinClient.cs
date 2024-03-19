@@ -12,7 +12,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace TestCryptoСomparer.Implementation
 {
-    public class KucoinClient : IGetTickerByRest
+    public class KucoinClient : IGetTicker
     {
         public async Task<string> GetBTCByRestAsync()
         {

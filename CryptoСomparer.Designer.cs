@@ -2,6 +2,7 @@
 using Bitget.Net.Clients;
 using Bybit.Net.Clients;
 using Kucoin.Net.Clients;
+using System;
 using System.Diagnostics;
 using TestCryptoСomparer.Abstractions;
 using TestCryptoСomparer.Implementation;
@@ -244,9 +245,9 @@ namespace TestCryptoСomparer
 
 
         //создаем лист клиентов для использования в разных кнопках
-        private List<IGetTickerByRest> GetClientsList()
+        private List<IGetTicker> GetClientsList()
         {
-            List<IGetTickerByRest> clientsList = new List<IGetTickerByRest>();
+            List<IGetTicker> clientsList = new List<IGetTicker>();
             clientsList.Add(new BinanceClient());
             clientsList.Add(new KucoinClient());
             clientsList.Add(new BitgetClient());
@@ -274,28 +275,50 @@ namespace TestCryptoСomparer
 
             CancellationToken token = ts.Token;
 
-            List<IGetTickerByRest> clientsList = GetClientsList();
+            List<IGetTicker> clientsList = GetClientsList();
             List<TextBoxMessendger> messengerList = GetTextBoxMessendgerList();
 
 
             List<Task> tasks = new List<Task>();
- 
 
-            Parallel.For(0, clientsList.Count,
-             index => {
-                 Task.Factory.StartNew(async () =>
-                 {
-                     while (!token.IsCancellationRequested)
-                     {
-                         var result = await clientsList[index].GetBTCByRestAsync();
-                         if (!token.IsCancellationRequested)
-                         {
-                             messengerList[index].SendMessege(result);
-                         }                       
-                         Thread.Sleep(5000);
-                     }
-                 });
-             });
+            for (int index = 0; index < clientsList.Count; index++)
+            {
+                int client = index;
+                tasks.Add(Task.Run(async () =>
+                    {
+
+                        while (!token.IsCancellationRequested)
+                        {
+                            var result = await clientsList[client].GetBTCByRestAsync();
+                            if (!token.IsCancellationRequested)
+                            {
+
+                                messengerList[client].SendMessege(result);
+                            }
+                            Thread.Sleep(5000);
+                        }
+                    }
+                ));
+            }
+
+
+            //Parallel.For(0, clientsList.Count,
+            //index =>
+            //{
+            //    Task.Factory.StartNew(async () =>
+            //    {
+            //        while (!token.IsCancellationRequested)
+            //        {
+            //            var result = await clientsList[index].GetBTCByRestAsync();
+            //            if (!token.IsCancellationRequested)
+            //            {
+            //                messengerList[index].SendMessege(result);
+            //            }
+            //            Thread.Sleep(5000);
+            //        }
+            //    });
+            //});
+
 
 
         }
