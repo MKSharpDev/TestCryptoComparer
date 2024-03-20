@@ -1,4 +1,6 @@
 ﻿using Binance.Net.Clients;
+using Binance.Net.Interfaces;
+using CryptoExchange.Net.Interfaces;
 using Microsoft.VisualBasic;
 using Newtonsoft.Json.Linq;
 using System;
@@ -11,21 +13,27 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace TestCryptoСomparer.Implementation
 {
-    public class BinanceClient: IGetTickerByRest
+    public class BinanceClient :  BaseClient<IBinanceTick>, IGetTickerByRest
     {
-        public async Task<string> GetBTCByRestAsync( )
+        public BinanceClient()
         {
+
             var restClient = new BinanceRestClient();
-            try
+            this.WebCall = restClient.SpotApi.ExchangeData.GetTickerAsync;
+
+            //this.Ticker = ticker;
+        }
+        public async Task<string> GetTicketByRestAsync(string ticker,CancellationToken token)
+        {         
+            switch (ticker)
             {
-                var tickerResult = await restClient.SpotApi.ExchangeData.GetTickerAsync("BTCUSDT");
-                var lastPrice = tickerResult.Data.LastPrice;
-                return lastPrice.ToString();
+                case "BTCUSDT":
+                    return await BaseGetTicketByRestAsync("BTCUSDT", token);
+                case "ETHUSDT":
+                    return await BaseGetTicketByRestAsync("ETHUSDT", token);
+                default:
+                    return "не задан тикер";
             }
-            catch (Exception)
-            {
-                return "Ошибка получения данных";
-            }   
         }
     }
 }

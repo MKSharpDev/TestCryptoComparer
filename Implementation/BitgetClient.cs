@@ -1,5 +1,7 @@
 ﻿using Binance.Net.Clients;
+using Binance.Net.Interfaces;
 using Bitget.Net.Clients;
+using Bitget.Net.Objects.Models;
 using Kucoin.Net.Clients;
 using Microsoft.VisualBasic;
 using Newtonsoft.Json.Linq;
@@ -13,29 +15,27 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace TestCryptoСomparer.Implementation
 {
-    public class BitgetClient : IGetTickerByRest
+    public class BitgetClient : BaseClient<BitgetTicker>, IGetTickerByRest
     {
-        public async Task<string> GetBTCByRestAsync()
+        public BitgetClient()
         {
+
             var restClient = new BitgetRestClient();
-            try
+            this.WebCall = restClient.SpotApi.ExchangeData.GetTickerAsync;
+
+            //this.Ticker = ticker;
+        }
+        public async Task<string> GetTicketByRestAsync(string ticker, CancellationToken token)
+        {
+            switch (ticker)
             {
-                var tickerResult = await restClient.SpotApi.ExchangeData.GetTickerAsync("BTCUSDT_SPBL");
-                if (tickerResult.Data == null)
-                {
-                    throw new Exception();
-                }
-                var lastPrice = tickerResult.Data.ClosePrice;
-                return lastPrice.ToString();
+                case "BTCUSDT":
+                    return await BaseGetTicketByRestAsync("BTCUSDT_SPBL", token);
+                case "ETHUSDT":
+                    return await BaseGetTicketByRestAsync("ETHUSDT_SPBL", token);
+                default:
+                    return "не задан тикер";
             }
-            catch (NullReferenceException)
-            {
-                return "Ошибка";
-            }
-            catch (Exception)
-            {
-                return "Ошибка получения данных";
-            }
-        }     
+        }
     }
 }

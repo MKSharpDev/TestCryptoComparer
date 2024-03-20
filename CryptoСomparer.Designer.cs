@@ -1,9 +1,4 @@
-﻿using Binance.Net.Clients;
-using Bitget.Net.Clients;
-using Bybit.Net.Clients;
-using Kucoin.Net.Clients;
-using System.Diagnostics;
-using TestCryptoСomparer.Abstractions;
+﻿using TestCryptoСomparer.Abstractions;
 using TestCryptoСomparer.Implementation;
 using TestCryptoСomparer.Implementation.Messendger;
 
@@ -15,6 +10,8 @@ namespace TestCryptoСomparer
         ///  Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
+
+        string ticker = "BTCUSDT";
 
         /// <summary>
         ///  Clean up any resources being used.
@@ -47,51 +44,50 @@ namespace TestCryptoСomparer
             label3 = new Label();
             label4 = new Label();
             StopBotton = new Button();
-            button3 = new Button();
-            comboBox1 = new ComboBox();
+            CryptoTypeComboBox = new ComboBox();
             label5 = new Label();
             label6 = new Label();
-            label7 = new Label();
+            SelectedView = new Label();
             SuspendLayout();
             // 
-            // textBox1
+            // binanceTextBox
             // 
             binanceTextBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             binanceTextBox.Location = new Point(271, 62);
-            binanceTextBox.Name = "textBox1";
+            binanceTextBox.Name = "binanceTextBox";
             binanceTextBox.Size = new Size(171, 29);
             binanceTextBox.TabIndex = 0;
             binanceTextBox.TextChanged += textBox1_TextChanged;
             // 
-            // textBox2
+            // kucoinTextBox
             // 
             kucoinTextBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             kucoinTextBox.Location = new Point(271, 97);
-            kucoinTextBox.Name = "textBox2";
+            kucoinTextBox.Name = "kucoinTextBox";
             kucoinTextBox.Size = new Size(171, 29);
             kucoinTextBox.TabIndex = 1;
             // 
-            // textBox3
+            // bitgetTextBox
             // 
             bitgetTextBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             bitgetTextBox.Location = new Point(271, 131);
-            bitgetTextBox.Name = "textBox3";
+            bitgetTextBox.Name = "bitgetTextBox";
             bitgetTextBox.Size = new Size(171, 29);
             bitgetTextBox.TabIndex = 2;
             // 
-            // textBox4
+            // bybitTextBox
             // 
             bybitTextBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             bybitTextBox.Location = new Point(271, 169);
-            bybitTextBox.Name = "textBox4";
+            bybitTextBox.Name = "bybitTextBox";
             bybitTextBox.Size = new Size(171, 29);
             bybitTextBox.TabIndex = 3;
             bybitTextBox.TextChanged += textBox4_TextChanged;
             // 
-            // button1
+            // GetByRestButton
             // 
             GetByRestButton.Location = new Point(54, 288);
-            GetByRestButton.Name = "button1";
+            GetByRestButton.Name = "GetByRestButton";
             GetByRestButton.Size = new Size(171, 50);
             GetByRestButton.TabIndex = 4;
             GetByRestButton.Text = "StartRest";
@@ -138,36 +134,29 @@ namespace TestCryptoСomparer
             label4.TabIndex = 8;
             label4.Text = "ByBit";
             // 
-            // button2
+            // StopBotton
             // 
             StopBotton.Location = new Point(424, 288);
-            StopBotton.Name = "button2";
+            StopBotton.Name = "StopBotton";
             StopBotton.Size = new Size(148, 50);
             StopBotton.TabIndex = 9;
             StopBotton.Text = "Stop";
             StopBotton.UseVisualStyleBackColor = true;
             StopBotton.Click += StopBottonClick;
             // 
-            // button3
+            // CryptoTypeComboBox
             // 
-            button3.Location = new Point(240, 288);
-            button3.Name = "button3";
-            button3.Size = new Size(160, 50);
-            button3.TabIndex = 10;
-            button3.Text = "StartSocket";
-            button3.UseVisualStyleBackColor = true;
-            // 
-            // comboBox1
-            // 
-            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox1.FlatStyle = FlatStyle.System;
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "BTC", "ETH" });
-            comboBox1.Location = new Point(487, 68);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(118, 23);
-            comboBox1.TabIndex = 11;
-            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+            CryptoTypeComboBox.DisplayMember = "BTC";
+            CryptoTypeComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            CryptoTypeComboBox.FlatStyle = FlatStyle.System;
+            CryptoTypeComboBox.FormattingEnabled = true;
+            CryptoTypeComboBox.Items.AddRange(new object[] { "BTCUSDT", "ETHUSDT" });
+            CryptoTypeComboBox.Location = new Point(487, 68);
+            CryptoTypeComboBox.Name = "CryptoTypeComboBox";
+            CryptoTypeComboBox.Size = new Size(118, 23);
+            CryptoTypeComboBox.TabIndex = 11;
+            CryptoTypeComboBox.ValueMember = "BTCUSDT";
+            CryptoTypeComboBox.SelectedIndexChanged += CryptoTypeComboBox_SelectedIndexChanged;
             // 
             // label5
             // 
@@ -189,25 +178,25 @@ namespace TestCryptoСomparer
             label6.Text = "Selected";
             label6.Click += label6_Click;
             // 
-            // label7
+            // SelectedView
             // 
-            label7.AutoSize = true;
-            label7.Location = new Point(553, 111);
-            label7.Name = "label7";
-            label7.Size = new Size(12, 15);
-            label7.TabIndex = 14;
-            label7.Text = "?";
+            SelectedView.AutoSize = true;
+            SelectedView.Location = new Point(544, 111);
+            SelectedView.Name = "SelectedView";
+            SelectedView.Size = new Size(0, 15);
+            SelectedView.TabIndex = 15;
+            SelectedView.Click += label8_Click;
+            SelectedView.Text = ticker;
             // 
             // CryptoСomparer
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(634, 411);
-            Controls.Add(label7);
+            Controls.Add(SelectedView);
             Controls.Add(label6);
             Controls.Add(label5);
-            Controls.Add(comboBox1);
-            Controls.Add(button3);
+            Controls.Add(CryptoTypeComboBox);
             Controls.Add(StopBotton);
             Controls.Add(label4);
             Controls.Add(label3);
@@ -279,28 +268,51 @@ namespace TestCryptoСomparer
 
 
             List<Task> tasks = new List<Task>();
- 
 
-            Parallel.For(0, clientsList.Count,
-             index => {
-                 Task.Factory.StartNew(async () =>
-                 {
-                     while (!token.IsCancellationRequested)
-                     {
-                         var result = await clientsList[index].GetBTCByRestAsync();
-                         if (!token.IsCancellationRequested)
-                         {
-                             messengerList[index].SendMessege(result);
-                         }                       
-                         Thread.Sleep(5000);
-                     }
-                 });
-             });
+            for (int index = 0; index < clientsList.Count; index++)
+            {
+                int client = index;
+                tasks.Add(Task.Run(async () =>
+                    {
 
+                        while (!token.IsCancellationRequested)
+                        {
+                            var result = await clientsList[client].GetTicketByRestAsync(ticker, token);
+                            if (!token.IsCancellationRequested)
+                            {
+                                messengerList[client].SendMessege(result);
+                            }
+                            Thread.Sleep(5000);
+                        }
+                    }
+                ));
+            }
 
+            //Parallel.For(0, clientsList.Count,
+            //index =>
+            //{
+            //    Task.Factory.StartNew(async () =>
+            //    {
+            //        while (!token.IsCancellationRequested)
+            //        {
+            //            var result = await clientsList[index].GetTicketByRestAsync(ticker, token);
+            //            if (!token.IsCancellationRequested)
+            //            {
+            //                messengerList[index].SendMessege(result);
+            //            }
+            //            Thread.Sleep(5000);
+            //        }
+            //    });
+            //});
         }
 
+        
+
         private async void StopBottonClick(object sender, EventArgs e)
+        {
+            Stop();
+        }
+        void Stop()
         {
             ts.Cancel();
             binanceTextBox.Text = string.Empty;
@@ -310,10 +322,21 @@ namespace TestCryptoСomparer
             ts = new CancellationTokenSource();
         }
 
-        private Button button3;
-        private ComboBox comboBox1;
+        private void CryptoTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            binanceTextBox.Text = string.Empty;
+            kucoinTextBox.Text = string.Empty;
+            bitgetTextBox.Text = string.Empty;
+            bybitTextBox.Text = string.Empty;
+
+            ticker = CryptoTypeComboBox.SelectedItem.ToString();
+            SelectedView.Text = ticker;
+
+        }
+
+        private ComboBox CryptoTypeComboBox;
         private Label label5;
         private Label label6;
-        private Label label7;
+        private Label SelectedView;
     }
 }

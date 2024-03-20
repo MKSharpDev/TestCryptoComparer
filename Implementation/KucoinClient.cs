@@ -1,6 +1,7 @@
 ﻿using Binance.Net.Clients;
 using Bybit.Net.Clients;
 using Kucoin.Net.Clients;
+using Kucoin.Net.Objects.Models.Spot;
 using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
@@ -12,21 +13,25 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace TestCryptoСomparer.Implementation
 {
-    public class KucoinClient : IGetTickerByRest
+    public class KucoinClient : BaseClient<KucoinTick> , IGetTickerByRest
     {
-        public async Task<string> GetBTCByRestAsync()
+        public KucoinClient()
         {
-            var restClient = new KucoinRestClient();
-            try
-            {
-                var tickerResult = await restClient.SpotApi.ExchangeData.GetTickerAsync("BTC-USDT");
+            KucoinRestClient restClient = new KucoinRestClient();
+            this.WebCall = restClient.SpotApi.ExchangeData.GetTickerAsync;
 
-                var lastPrice = tickerResult.Data.LastPrice;
-                return lastPrice.ToString();
-            }
-            catch (Exception)
+            //this.Ticker = ticker;
+        }
+        public async Task<string> GetTicketByRestAsync(string ticker, CancellationToken token)
+        {
+            switch (ticker)
             {
-                return "Ошибка получения данных";
+                case "BTCUSDT":
+                    return await BaseGetTicketByRestAsync("BTC-USDT", token);
+                case "ETHUSDT":
+                    return await BaseGetTicketByRestAsync("ETH-USDT", token);
+                default:
+                    return "не задан тикер";
             }
         }
     }

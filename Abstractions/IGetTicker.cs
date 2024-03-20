@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace TestCryptoСomparer.Abstractions
 {
-    public interface IGetTickerByRest
+    internal interface IGetTicker
     {
-        public Task<string> GetTicketByRestAsync(string ticker, CancellationToken token);
+        public Task<string> BaseGetTicketByRestAsync(string ticker, CancellationToken token);
 
     }
 }
