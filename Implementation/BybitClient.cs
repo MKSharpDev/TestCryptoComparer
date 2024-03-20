@@ -1,6 +1,7 @@
 ﻿using Binance.Net.Clients;
 using Bitget.Net.Clients;
 using Bybit.Net.Clients;
+using Bybit.Net.Objects.Models.V5;
 using Kucoin.Net.Clients;
 using Microsoft.VisualBasic;
 using System;
@@ -13,32 +14,25 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace TestCryptoСomparer.Implementation
 {
-    public class BybitClient :  IGetTicker
+    public class BybitClient :  BaseClient<BybitResponse<BybitSpotTicker>>, IGetTickerByRest
     {
-
-        public async Task<string> GetBTCByRestAsync()
-        {
-            return await GetTickerByRestV5ApiAsync("BTCUSDT");
-        }
-
-        public async Task<string> GetETHByRestAsync()
-        {
-            return await GetTickerByRestV5ApiAsync("USDT");
-        }
-
-
-        public async Task<string> GetTickerByRestV5ApiAsync(string ticker)
+        public BybitClient()
         {
             var restClient = new BybitRestClient();
-            try
+            this.WebCall = restClient.V5Api.ExchangeData.GetSpotTickersAsync;
+
+            //this.Ticker = ticker;
+        }
+        public async Task<string> GetTicketByRestAsync(string ticker, CancellationToken token)
+        {
+            switch (ticker)
             {
-                var tickerResult = await restClient.V5Api.ExchangeData.GetSpotTickersAsync(ticker);
-                var lastPrice = tickerResult.Data.List.First().LastPrice;
-                return lastPrice.ToString();           
-            }
-            catch (Exception)
-            {
-                return "Ошибка получения данных";
+                case "BTCUSDT":
+                    return await BaseGetTicketByRestAsync("BTCUSDT", token);
+                case "ETHUSDT":
+                    return await BaseGetTicketByRestAsync("ETHUSDT", token);
+                default:
+                    return "не задан тикер";
             }
         }
     }

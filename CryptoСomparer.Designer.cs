@@ -1,6 +1,7 @@
 ﻿using Binance.Net.Clients;
 using Bitget.Net.Clients;
 using Bybit.Net.Clients;
+using CryptoExchange.Net.Clients;
 using Kucoin.Net.Clients;
 using System;
 using System.Diagnostics;
@@ -245,9 +246,9 @@ namespace TestCryptoСomparer
 
 
         //создаем лист клиентов для использования в разных кнопках
-        private List<IGetTicker> GetClientsList()
+        private List<IGetTickerByRest> GetClientsList()
         {
-            List<IGetTicker> clientsList = new List<IGetTicker>();
+            List<IGetTickerByRest> clientsList = new List<IGetTickerByRest>();
             clientsList.Add(new BinanceClient());
             clientsList.Add(new KucoinClient());
             clientsList.Add(new BitgetClient());
@@ -275,7 +276,7 @@ namespace TestCryptoСomparer
 
             CancellationToken token = ts.Token;
 
-            List<IGetTicker> clientsList = GetClientsList();
+            List<IGetTickerByRest> clientsList = GetClientsList();
             List<TextBoxMessendger> messengerList = GetTextBoxMessendgerList();
 
 
@@ -289,7 +290,7 @@ namespace TestCryptoСomparer
 
                         while (!token.IsCancellationRequested)
                         {
-                            var result = await clientsList[client].GetBTCByRestAsync();
+                            var result = await clientsList[client].GetTicketByRestAsync("ETHUSDT", token);
                             if (!token.IsCancellationRequested)
                             {
 
