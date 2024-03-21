@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TestCryptoComparerClassLibrary")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+579bf8efc744d46c7ef9a17aadc098d6f83b9db3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cf24fa04355b82018ed3715351923908f3075c30")]
 [assembly: System.Reflection.AssemblyProductAttribute("TestCryptoComparerClassLibrary")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TestCryptoComparerClassLibrary")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

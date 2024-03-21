@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "I4fVV/4BuwTOsmZk0N6IL/pJ/9JfQQUUiypZ48lVKdpacBCVLLdjX/s6Wl9rgaJKR9+/1NET6otpa2CeBHCf8w==",
+  "dgSpecHash": "d4axe/fcQ1CKZjqDs9rY8PE/cS565Wj0Gpo+Iy10ItyyheAgbbKz5tLFdbhOndUZABYarWH+50pwyg3GQLv9UA==",
   "success": true,
-  "projectFilePath": "D:\\reposTest\\TestCryptoComparer\\TestCryptoComparerClassLibrary\\TestCryptoComparerClassLibrary.csproj",
+  "projectFilePath": "D:\\reposTest\\TCP\\TestCryptoComparerClassLibrary\\TestCryptoComparerClassLibrary.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\MegoTelega\\.nuget\\packages\\binance.net\\9.7.0\\binance.net.9.7.0.nupkg.sha512",
     "C:\\Users\\MegoTelega\\.nuget\\packages\\bybit.net\\3.7.0\\bybit.net.3.7.0.nupkg.sha512",

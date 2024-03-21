@@ -889,11 +889,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\reposTest\\TestCryptoComparer\\TestCryptoComparerClassLibrary\\TestCryptoComparerClassLibrary.csproj",
+      "projectUniqueName": "D:\\reposTest\\TCP\\TestCryptoComparerClassLibrary\\TestCryptoComparerClassLibrary.csproj",
       "projectName": "TestCryptoComparerClassLibrary",
-      "projectPath": "D:\\reposTest\\TestCryptoComparer\\TestCryptoComparerClassLibrary\\TestCryptoComparerClassLibrary.csproj",
+      "projectPath": "D:\\reposTest\\TCP\\TestCryptoComparerClassLibrary\\TestCryptoComparerClassLibrary.csproj",
       "packagesPath": "C:\\Users\\MegoTelega\\.nuget\\packages\\",
-      "outputPath": "D:\\reposTest\\TestCryptoComparer\\TestCryptoComparerClassLibrary\\obj\\",
+      "outputPath": "D:\\reposTest\\TCP\\TestCryptoComparerClassLibrary\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
