@@ -16,4 +16,8 @@
     <PackageReference Include="Kucoin.Net" Version="5.3.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TestCryptoComparerClassLibrary\TestCryptoComparerClassLibrary.csproj" />
+  </ItemGroup>
+
 </Project>

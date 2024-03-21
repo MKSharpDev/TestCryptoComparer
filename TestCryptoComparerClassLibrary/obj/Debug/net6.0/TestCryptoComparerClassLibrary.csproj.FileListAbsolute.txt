@@ -1,0 +1,13 @@
+D:\reposTest\TestCryptoComparer\TestCryptoComparerClassLibrary\bin\Debug\net6.0\TestCryptoComparerClassLibrary.deps.json
+D:\reposTest\TestCryptoComparer\TestCryptoComparerClassLibrary\bin\Debug\net6.0\TestCryptoComparerClassLibrary.dll
+D:\reposTest\TestCryptoComparer\TestCryptoComparerClassLibrary\bin\Debug\net6.0\TestCryptoComparerClassLibrary.pdb
+D:\reposTest\TestCryptoComparer\TestCryptoComparerClassLibrary\obj\Debug\net6.0\TestCryptoComparerClassLibrary.csproj.AssemblyReference.cache
+D:\reposTest\TestCryptoComparer\TestCryptoComparerClassLibrary\obj\Debug\net6.0\TestCryptoComparerClassLibrary.GeneratedMSBuildEditorConfig.editorconfig
+D:\reposTest\TestCryptoComparer\TestCryptoComparerClassLibrary\obj\Debug\net6.0\TestCryptoComparerClassLibrary.AssemblyInfoInputs.cache
+D:\reposTest\TestCryptoComparer\TestCryptoComparerClassLibrary\obj\Debug\net6.0\TestCryptoComparerClassLibrary.AssemblyInfo.cs
+D:\reposTest\TestCryptoComparer\TestCryptoComparerClassLibrary\obj\Debug\net6.0\TestCryptoComparerClassLibrary.csproj.CoreCompileInputs.cache
+D:\reposTest\TestCryptoComparer\TestCryptoComparerClassLibrary\obj\Debug\net6.0\TestCryptoComparerClassLibrary.sourcelink.json
+D:\reposTest\TestCryptoComparer\TestCryptoComparerClassLibrary\obj\Debug\net6.0\TestCryptoComparerClassLibrary.dll
+D:\reposTest\TestCryptoComparer\TestCryptoComparerClassLibrary\obj\Debug\net6.0\refint\TestCryptoComparerClassLibrary.dll
+D:\reposTest\TestCryptoComparer\TestCryptoComparerClassLibrary\obj\Debug\net6.0\TestCryptoComparerClassLibrary.pdb
+D:\reposTest\TestCryptoComparer\TestCryptoComparerClassLibrary\obj\Debug\net6.0\ref\TestCryptoComparerClassLibrary.dll

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TestCryptoСomparer.Abstractions
+namespace TestCryptoComparerClassLibrary.Abstractions
 {
     internal interface IGetTicker
     {

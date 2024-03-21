@@ -1,30 +1,30 @@
 ﻿using Binance.Net.Clients;
-using Binance.Net.Interfaces;
-using CryptoExchange.Net.Interfaces;
+using Bitget.Net.Clients;
+using Bybit.Net.Clients;
+using Bybit.Net.Objects.Models.V5;
+using Kucoin.Net.Clients;
 using Microsoft.VisualBasic;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TestCryptoСomparer.Abstractions;
+using TestCryptoComparerClassLibrary.Abstractions;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace TestCryptoСomparer.Implementation
+namespace TestCryptoComparerClassLibrary.Implementation
 {
-    public class BinanceClient :  BaseClient<IBinanceTick>, IGetTickerByRest
+    public class BybitClient :  BaseClient<BybitResponse<BybitSpotTicker>>, IGetTickerByRest
     {
-        public BinanceClient()
+        public BybitClient()
         {
-
-            var restClient = new BinanceRestClient();
-            this.WebCall = restClient.SpotApi.ExchangeData.GetTickerAsync;
+            var restClient = new BybitRestClient();
+            this.WebCall = restClient.V5Api.ExchangeData.GetSpotTickersAsync;
 
             //this.Ticker = ticker;
         }
-        public async Task<string> GetTicketByRestAsync(string ticker,CancellationToken token)
-        {         
+        public async Task<string> GetTicketByRestAsync(string ticker, CancellationToken token)
+        {
             switch (ticker)
             {
                 case "BTCUSDT":

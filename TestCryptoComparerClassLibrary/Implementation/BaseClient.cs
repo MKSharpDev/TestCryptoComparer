@@ -1,12 +1,12 @@
 ﻿using Binance.Net.Interfaces;
 using Bybit.Net.Objects.Models.V5;
 using CryptoExchange.Net.Objects;
-using TestCryptoСomparer.Abstractions;
+using TestCryptoComparerClassLibrary.Abstractions;
 using Bitget.Net.Objects.Models;
 using Kucoin.Net.Objects.Models.Spot;
 
 
-namespace TestCryptoСomparer.Implementation
+namespace TestCryptoComparerClassLibrary.Implementation
 {
     public class BaseClient<T> : IGetTicker
     {

@@ -10,10 +10,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TestCryptoСomparer.Abstractions;
+using TestCryptoComparerClassLibrary.Abstractions;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace TestCryptoСomparer.Implementation
+namespace TestCryptoComparerClassLibrary.Implementation
 {
     public class BitgetClient : BaseClient<BitgetTicker>, IGetTickerByRest
     {
