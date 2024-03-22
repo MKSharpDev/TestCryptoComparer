@@ -2,16 +2,9 @@
 using Bybit.Net.Clients;
 using Kucoin.Net.Clients;
 using Kucoin.Net.Objects.Models.Spot;
-using Microsoft.VisualBasic;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TestCryptoСomparer.Abstractions;
-using static System.Net.Mime.MediaTypeNames;
+using TestCryptoСomparerClassLibrary.Abstractions;
 
-namespace TestCryptoСomparer.Implementation
+namespace TestCryptoСomparerClassLibrary.Implementation
 {
     public class KucoinClient : BaseClient<KucoinTick> , IGetTickerByRest
     {

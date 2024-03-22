@@ -1,19 +1,8 @@
-﻿using Binance.Net.Clients;
-using Binance.Net.Interfaces;
-using Bitget.Net.Clients;
+﻿using Bitget.Net.Clients;
 using Bitget.Net.Objects.Models;
-using Kucoin.Net.Clients;
-using Microsoft.VisualBasic;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TestCryptoСomparer.Abstractions;
-using static System.Net.Mime.MediaTypeNames;
+using TestCryptoСomparerClassLibrary.Abstractions;
 
-namespace TestCryptoСomparer.Implementation
+namespace TestCryptoСomparerClassLibrary.Implementation
 {
     public class BitgetClient : BaseClient<BitgetTicker>, IGetTickerByRest
     {

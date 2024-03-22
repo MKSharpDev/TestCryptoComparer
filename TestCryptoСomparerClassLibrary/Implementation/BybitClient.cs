@@ -1,18 +1,8 @@
-﻿using Binance.Net.Clients;
-using Bitget.Net.Clients;
-using Bybit.Net.Clients;
+﻿using Bybit.Net.Clients;
 using Bybit.Net.Objects.Models.V5;
-using Kucoin.Net.Clients;
-using Microsoft.VisualBasic;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TestCryptoСomparer.Abstractions;
-using static System.Net.Mime.MediaTypeNames;
+using TestCryptoСomparerClassLibrary.Abstractions;
 
-namespace TestCryptoСomparer.Implementation
+namespace TestCryptoСomparerClassLibrary.Implementation
 {
     public class BybitClient :  BaseClient<BybitResponse<BybitSpotTicker>>, IGetTickerByRest
     {

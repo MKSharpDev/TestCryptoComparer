@@ -1,5 +1,5 @@
-﻿using TestCryptoСomparer.Abstractions;
-using TestCryptoСomparer.Implementation;
+﻿using TestCryptoСomparerClassLibrary.Abstractions;
+using TestCryptoСomparerClassLibrary.Implementation;
 using TestCryptoСomparer.Implementation.Messendger;
 
 namespace TestCryptoСomparer
