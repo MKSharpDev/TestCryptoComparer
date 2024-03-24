@@ -8,14 +8,18 @@ using Kucoin.Net.Objects.Models.Spot;
 
 namespace TestCryptoСomparerClassLibrary.Implementation
 {
-    public class BaseClient<T> : IGetTicker
+    public abstract class BaseClient<T> : IGetTicker
     {
-        protected delegate Task<WebCallResult<T>> BaseCall (string str, CancellationToken token);
-        //public string Ticker {  get; set; }
+        protected delegate Task<WebCallResult<T>> BaseWebCall (string str, CancellationToken token);
 
-        protected BaseCall WebCall;
+        protected BaseWebCall WebCall;
 
-        public async Task<string> BaseGetTicketByRestAsync(string ticker, CancellationToken cancellationToken)
+        string? price;
+        public string? Price
+        {
+            get => price; set => price = value;
+        }
+        protected async Task<string> BaseGetTicketByRestAsync( string ticker,  CancellationToken cancellationToken)
         {
             decimal? lastPrice = 0m;
             try
@@ -43,8 +47,10 @@ namespace TestCryptoСomparerClassLibrary.Implementation
             {
                 return "Ошибка получения данных";
             }
-
         }
+
+        public abstract Task<string> GetTicketByRestAsync(string ticker, CancellationToken token);
+        public abstract Task GetTicketBySocketAsync(string ticker, CancellationToken token);
 
     }
 }

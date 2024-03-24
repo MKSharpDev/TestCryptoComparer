@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TestCryptoСomparerClassLibrary.Abstractions
+﻿namespace TestCryptoСomparerClassLibrary.Abstractions
 {
-    internal interface IGetTicker
+    public interface IGetTicker
     {
-        public Task<string> BaseGetTicketByRestAsync(string ticker, CancellationToken token);
+        public Task<string> GetTicketByRestAsync(string ticker, CancellationToken token);
+        public Task GetTicketBySocketAsync(string ticker, CancellationToken token);
+
+        public string? Price
+        {
+            get; set;
+        }
 
     }
 }

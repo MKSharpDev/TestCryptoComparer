@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TestCryptoСomparer.Implementation.Messendger
+﻿namespace TestCryptoСomparer.Implementation.Messendger
 {
     public class TextBoxMessendger : Messendger
     {
