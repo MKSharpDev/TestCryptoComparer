@@ -48,6 +48,8 @@ namespace TestCryptoСomparer
             label5 = new Label();
             label6 = new Label();
             SelectedView = new Label();
+            StartSocket = new Button();
+            SelectedCr = new Label();
             SuspendLayout();
             // 
             // binanceTextBox
@@ -186,13 +188,33 @@ namespace TestCryptoСomparer
             SelectedView.Size = new Size(0, 15);
             SelectedView.TabIndex = 15;
             SelectedView.Click += label8_Click;
-            SelectedView.Text = ticker;
+            // 
+            // StartSocket
+            // 
+            StartSocket.Location = new Point(250, 288);
+            StartSocket.Name = "StartSocket";
+            StartSocket.Size = new Size(153, 50);
+            StartSocket.TabIndex = 16;
+            StartSocket.Text = "StartSocket";
+            StartSocket.UseVisualStyleBackColor = true;
+            StartSocket.Click += StartSocket_Click;
+            // 
+            // SelectedCr
+            // 
+            SelectedCr.AutoSize = true;
+            SelectedCr.Location = new Point(544, 111);
+            SelectedCr.Name = "SelectedCr";
+            SelectedCr.Size = new Size(38, 15);
+            SelectedCr.TabIndex = 17;
+            SelectedCr.Text = ticker;
             // 
             // CryptoСomparer
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(634, 411);
+            Controls.Add(SelectedCr);
+            Controls.Add(StartSocket);
             Controls.Add(SelectedView);
             Controls.Add(label6);
             Controls.Add(label5);
@@ -233,9 +255,9 @@ namespace TestCryptoСomparer
 
 
         //создаем лист клиентов для использования в разных кнопках
-        private List<IGetTickerByRest> GetClientsList()
+        private List<IGetTicker> GetClientsList()
         {
-            List<IGetTickerByRest> clientsList = new List<IGetTickerByRest>();
+            List<IGetTicker> clientsList = new List<IGetTicker>();
             clientsList.Add(new BinanceClient());
             clientsList.Add(new KucoinClient());
             clientsList.Add(new BitgetClient());
@@ -258,14 +280,13 @@ namespace TestCryptoСomparer
         private CancellationTokenSource ts = new CancellationTokenSource();
 
 
-        private async void GetByRestButtonClick(object sender, EventArgs e)
+        private void GetByRestButtonClick(object sender, EventArgs e)
         {
-
+            Stop();
             CancellationToken token = ts.Token;
 
-            List<IGetTickerByRest> clientsList = GetClientsList();
+            List<IGetTicker> clientsList = GetClientsList();
             List<TextBoxMessendger> messengerList = GetTextBoxMessendgerList();
-
 
             List<Task> tasks = new List<Task>();
 
@@ -287,34 +308,47 @@ namespace TestCryptoСomparer
                     }
                 ));
             }
-
-            //Parallel.For(0, clientsList.Count,
-            //index =>
-            //{
-            //    Task.Factory.StartNew(async () =>
-            //    {
-            //        while (!token.IsCancellationRequested)
-            //        {
-            //            var result = await clientsList[index].GetTicketByRestAsync(ticker, token);
-            //            if (!token.IsCancellationRequested)
-            //            {
-            //                messengerList[index].SendMessege(result);
-            //            }
-            //            Thread.Sleep(5000);
-            //        }
-            //    });
-            //});
         }
 
-        
+        private void StartSocket_Click(object sender, EventArgs e)
+        {
+
+            Stop();
+            CancellationToken token = ts.Token;
+
+            List<IGetTicker> clientsList = GetClientsList();
+
+            List<TextBoxMessendger> messengerList = GetTextBoxMessendgerList();
+
+
+            List<Task> tasks = new List<Task>();
+
+            for (int index = 0; index < clientsList.Count; index++)
+            {
+                int client = index;
+                tasks.Add(Task.Run(async () =>
+                {
+
+                    await clientsList[client].GetTicketBySocketAsync(ticker, token);
+                    Thread.Sleep(800);
+                    while (!token.IsCancellationRequested)
+                    {
+                        messengerList[client].SendMessege(clientsList[client].Price);
+                        Thread.Sleep(5000);
+                    }
+                }));
+            }
+        }
 
         private async void StopBottonClick(object sender, EventArgs e)
         {
             Stop();
         }
+
         void Stop()
         {
             ts.Cancel();
+            Thread.Sleep(200);
             binanceTextBox.Text = string.Empty;
             kucoinTextBox.Text = string.Empty;
             bitgetTextBox.Text = string.Empty;
@@ -324,13 +358,10 @@ namespace TestCryptoСomparer
 
         private void CryptoTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            binanceTextBox.Text = string.Empty;
-            kucoinTextBox.Text = string.Empty;
-            bitgetTextBox.Text = string.Empty;
-            bybitTextBox.Text = string.Empty;
+            Stop();
 
             ticker = CryptoTypeComboBox.SelectedItem.ToString();
-            SelectedView.Text = ticker;
+            SelectedCr.Text = ticker;
 
         }
 
@@ -338,5 +369,7 @@ namespace TestCryptoСomparer
         private Label label5;
         private Label label6;
         private Label SelectedView;
+        private Button StartSocket;
+        private Label SelectedCr;
     }
 }
